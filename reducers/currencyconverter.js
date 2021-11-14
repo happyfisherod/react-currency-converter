@@ -1,9 +1,12 @@
 //get component actions
 import { 
     CONVERT_CURRENCY_SUCCESS, 
+    CONVERT_CURRENCY_REVERSE_SUCCESS, 
     CONVERT_CURRENCY_ERROR, 
     PERFORM_CURRENCY_CONVERSION, 
+    PERFORM_CURRENCY_CONVERSION_REVERSE, 
     NEW_CONVERSION, 
+    NEW_CONVERSION_REVERSE, 
     CURRENCY_CHANGED,
     CURRENCY_SWAPPED
 } from '../actions/currencyconverter';
@@ -28,6 +31,7 @@ const initialState = {
     },
     conversion: {},
     isLoading: false,
+    isLoadingReverse: false,
     countryOptions: CURRENCY_OPTIONS
 };
 
@@ -48,6 +52,16 @@ export default (state, action) => {
                 }
             }
 
+        case CONVERT_CURRENCY_REVERSE_SUCCESS:
+            return {
+                ...state,
+                isLoadingReverse: false,
+                fromData: {
+                    ...state.fromData,
+                    value: action.conversion
+                }
+            }
+
         case NEW_CONVERSION:
             return {
                 ...state,
@@ -61,6 +75,22 @@ export default (state, action) => {
                 toData: {
                     ...state.toData,
                     currency: action.toCurrency
+                }
+            }
+
+        case NEW_CONVERSION_REVERSE:
+            return {
+                ...state,
+                conversion: {},
+                isLoadingReverse: true,
+                fromData: {
+                    ...state.fromData,
+                    currency: action.fromCurrency
+                },
+                toData: {
+                    ...state.toData,
+                    currency: action.toCurrency,
+                    value: action.amount
                 }
             }
 
@@ -98,10 +128,17 @@ export default (state, action) => {
                 isLoading: true
             }
 
+        case PERFORM_CURRENCY_CONVERSION_REVERSE:
+            return {
+                ...state,
+                isLoadingReverse: true
+            }
+
         case CONVERT_CURRENCY_ERROR: 
             return {
                 ...state,
-                isLoading: false
+                isLoading: false,
+                isLoadingReverse: false
             }
 
         case LOCATION_CHANGE:

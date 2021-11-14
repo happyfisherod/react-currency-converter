@@ -2,7 +2,7 @@ import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-export default function CurrencyConverter({ toData, fromData, isLoading, countryOptions, handleCurrencySwap, handleCurrencyChanged, handleCurrencyConversion }) {
+export default function CurrencyConverter({ toData, fromData, isLoading, isLoadingReverse, countryOptions, handleCurrencySwap, handleCurrencyChanged, handleCurrencyConversion, handleCurrencyConversionReverse }) {
         
     return (
         <div className="main">
@@ -54,6 +54,7 @@ export default function CurrencyConverter({ toData, fromData, isLoading, country
                             fluid
                             search
                             selection
+                            loading={isLoadingReverse}
                             value={toData.currency}
                             onChange={ (e, data) => handleCurrencyChanged("toData", data.value)}
                             options={countryOptions}
@@ -61,7 +62,10 @@ export default function CurrencyConverter({ toData, fromData, isLoading, country
                     </div>
                     <div className="coverter__input">
                         <span className="currency">{toData.symbol}</span>
-                        <input className="" placeholder="0" value={toData.value} readOnly />
+                        <input className="" placeholder="0" value={toData.value} onChange={e => {
+                            const amount = e.target.value;
+                            handleCurrencyConversionReverse(fromData.currency, toData.currency, amount);
+                        }} />
                     </div>
                 </div>
                 {/** END TO CURRENCY CONTAINER */}

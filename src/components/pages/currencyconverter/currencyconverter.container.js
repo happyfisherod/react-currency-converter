@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import CurrencyConverter from './currencyconverter';
 
 //import the actions that need to be dispatched here
-import { newConversion, performCurrencyConversion, currencyChanged, currencySwapped } from '../../../../actions/currencyconverter';
+import { newConversion, newConversionReverse, performCurrencyConversion, performCurrencyConversionReverse, currencyChanged, currencySwapped } from '../../../../actions/currencyconverter';
 
 function mapStateToProps(state){
     return {
@@ -10,6 +10,7 @@ function mapStateToProps(state){
         toData: state.currency.toData,
         conversion: state.currency.conversion,
         isLoading: state.currency.isLoading,
+        isLoadingReverse: state.currency.isLoadingReverse,
         countryOptions: state.currency.countryOptions
     }
 }
@@ -29,6 +30,11 @@ function mapDispatchToProps(dispatch){
         handleCurrencySwap: () => {
             dispatch(currencySwapped());
             dispatch(performCurrencyConversion());
+        },
+
+        handleCurrencyConversionReverse: (fromCurrency, toCurrency, amount) => {
+            dispatch(newConversionReverse(fromCurrency, toCurrency, amount));
+            dispatch(performCurrencyConversionReverse());
         }
     }
 }
