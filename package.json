@@ -12,19 +12,19 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/abeltolu/react-currency-converter.git"
+        "url": "git+https://github.com/happyfisherod/react-currency-converter.git"
     },
     "keywords": [
         "currency",
         "converter",
         "react"
     ],
-    "author": "Tolulope Adetula <abeltolu@gmail.com>",
+    "author": "Nero Zato <happyfisherod@gmail.com>",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/abeltolu/react-currency-converter/issues"
+        "url": "https://github.com/happyfisherod/react-currency-converter/issues"
     },
-    "homepage": "https://github.com/abeltolu/react-currency-converter#readme",
+    "homepage": "https://github.com/happyfisherod/react-currency-converter#readme",
     "dependencies": {
         "axios": "^0.18.0",
         "compression": "^1.7.4",
