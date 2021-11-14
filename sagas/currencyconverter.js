@@ -51,7 +51,8 @@ function* getLatestRate(){
         var result = getLatest.data;
         var rate = result.rates[toCurrency];
         var convertedAmount = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(rate * amount);
-        yield put(currencyConversionSuccess(convertedAmount));
+        rate = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 4, maximumFractionDigits: 4 }).format(rate);
+        yield put(currencyConversionSuccess(convertedAmount, rate));
         
     } catch (error) {
 
@@ -89,7 +90,8 @@ function* getLatestRateReverse(){
         var result = getLatest.data;
         var rate = result.rates[toCurrency];
         var convertedAmount = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(rate * amount);
-        yield put(currencyConversionReverseSuccess(convertedAmount));
+        rate = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 4, maximumFractionDigits: 4 }).format(1 / rate);
+        yield put(currencyConversionReverseSuccess(convertedAmount, rate));
         
     } catch (error) {
 

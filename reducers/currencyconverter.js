@@ -7,8 +7,9 @@ import {
     PERFORM_CURRENCY_CONVERSION_REVERSE, 
     NEW_CONVERSION, 
     NEW_CONVERSION_REVERSE, 
-    CURRENCY_CHANGED,
-    CURRENCY_SWAPPED
+    CURRENCY_CHANGED, 
+    CURRENCY_SWAPPED, 
+    PERFORM_CURRENCY_EXCHANGE 
 } from '../actions/currencyconverter';
 
 //get list of all currencies
@@ -22,14 +23,20 @@ const initialState = {
     fromData: {
         currency: 'EUR',
         symbol: "€",
-        value: 1
+        value: ''
     },
     toData: {
         currency: 'USD',
         symbol: "$",
-        value: 0
+        value: ''
     },
+    rate: 1,
     conversion: {},
+    balance: {
+        USD: 200,
+        EUR: 150,
+        GBP: 10
+    },
     isLoading: false,
     isLoadingReverse: false,
     countryOptions: CURRENCY_OPTIONS
@@ -49,7 +56,8 @@ export default (state, action) => {
                 toData: {
                     ...state.toData,
                     value: action.conversion
-                }
+                },
+                rate: action.rate
             }
 
         case CONVERT_CURRENCY_REVERSE_SUCCESS:
@@ -59,7 +67,8 @@ export default (state, action) => {
                 fromData: {
                     ...state.fromData,
                     value: action.conversion
-                }
+                },
+                rate: action.rate
             }
 
         case NEW_CONVERSION:
@@ -139,6 +148,24 @@ export default (state, action) => {
                 ...state,
                 isLoading: false,
                 isLoadingReverse: false
+            }
+
+        case PERFORM_CURRENCY_EXCHANGE:
+            return {
+                ...state,
+                balance: {
+                    ...state.balance,
+                    [action.fromCurrency]: Number((state.balance[action.fromCurrency] - parseFloat(action.fromAmount)).toFixed(2)),
+                    [action.toCurrency]: Number((state.balance[action.toCurrency] + parseFloat(action.toAmount)).toFixed(2))
+                },
+                fromData: {
+                    ...state.fromData,
+                    value: ''
+                },
+                toData: {
+                    ...state.toData,
+                    value: ''
+                },
             }
 
         case LOCATION_CHANGE:

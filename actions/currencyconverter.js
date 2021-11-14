@@ -8,6 +8,7 @@ export const NEW_CONVERSION = 'NEW_CONVERSION';
 export const NEW_CONVERSION_REVERSE = 'NEW_CONVERSION_REVERSE';
 export const CURRENCY_CHANGED = 'CURRENCY_CHANGED';
 export const CURRENCY_SWAPPED = 'CURRENCY_SWAPPED';
+export const PERFORM_CURRENCY_EXCHANGE = 'PERFORM_CURRENCY_EXCHANGE';
 
 //action creators = functions that create actions
 
@@ -29,14 +30,14 @@ export const performCurrencyConversionReverse = () => ({
     type: PERFORM_CURRENCY_CONVERSION_REVERSE
 });
 
-export const currencyConversionSuccess = (conversion) => ({
+export const currencyConversionSuccess = (conversion, rate) => ({
     type: CONVERT_CURRENCY_SUCCESS,
-    conversion
+    conversion, rate
 });
 
-export const currencyConversionReverseSuccess = (conversion) => ({
+export const currencyConversionReverseSuccess = (conversion, rate) => ({
     type: CONVERT_CURRENCY_REVERSE_SUCCESS,
-    conversion
+    conversion, rate
 });
 
 export const currencyChanged = (selection, currency) => ({
@@ -50,4 +51,9 @@ export const currencySwapped = () => ({
 
 export const currencyConversionError = () => ({
     type: CONVERT_CURRENCY_ERROR
+});
+
+export const performCurrencyExchange = (fromCurrency, fromAmount, toCurrency, toAmount) => ({
+    type: PERFORM_CURRENCY_EXCHANGE,
+    fromCurrency, fromAmount, toCurrency, toAmount
 });
