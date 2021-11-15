@@ -17,4 +17,4 @@ Live exchange rates was provided by: <a href="https://exchangeratesapi.io" targe
 5. Run `npm run build`<br/><br/>
 
 <b>Usage</b><br/>
-Run `npm run dev`<br/><br/><br/>
+Run `npm run dev`<br/>
