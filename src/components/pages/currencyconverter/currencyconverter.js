@@ -14,16 +14,16 @@ export default function CurrencyConverter({ toData, fromData, rate, balance, isL
                 <div className="from__container">
                     <div className="top_title">Balance: {fromData.symbol}{balance[fromData.currency]}</div>
                     <div className="converter__select">
-                    <Dropdown
-                        placeholder='Choose your currency'
-                        fluid
-                        search
-                        selection
-                        loading={isLoading}
-                        value={fromData.currency}
-                        onChange={ (e, data) => handleCurrencyChanged("fromData", data.value)}
-                        options={countryOptions}
-                    />
+                        <Dropdown
+                            placeholder='Choose your currency'
+                            fluid
+                            search
+                            selection
+                            loading={isLoading}
+                            value={fromData.currency}
+                            onChange={ (e, data) => handleCurrencyChanged("fromData", data.value)}
+                            options={countryOptions}
+                        />
                     </div>
                     <div className="coverter__input">
                         <span className="currency">-</span>
@@ -32,7 +32,7 @@ export default function CurrencyConverter({ toData, fromData, rate, balance, isL
                             handleCurrencyConversion(fromData.currency, toData.currency, amount);
                         }} />
                         {fromData.value > balance[fromData.currency]
-                            ? <span className="balance__danger">Exceeds balance</span>
+                            ? <span className="balance__error">Exceeds balance</span>
                             : null
                         }
                     </div>
