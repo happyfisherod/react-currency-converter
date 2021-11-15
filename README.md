@@ -1,8 +1,8 @@
 # React Currency Converter
-Currency converter built with React.js<br/><br/><br/>
+Currency converter built with React.js<br/><br/>
 
 <b>Demo</b>
-https://curexc.herokuapp.com/<br/>
+https://curexc.herokuapp.com/<br/><br/>
 
 <b>Description</b><br/>
 A simple currency converter built with React, Redux, and Redux-Sagas.<br/>
